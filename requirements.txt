@@ -1,0 +1,2 @@
+KUtil-jakubaugustyn~=0.0.11 ; python_version == '3.12' # https://pypi.org/project/KUtil-jakubaugustyn/
+jsbeautifier~=1.15.1 # https://pypi.org/project/jsbeautifier/

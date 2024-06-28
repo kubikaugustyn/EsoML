@@ -1,0 +1,53 @@
+.strings en_US
+Let 666 be translated to <h1>An EsoML counter example</h1>.
+Let 666 be translated to Hello world! Here's a value from the ROM: .
+Let 1 be translated to ++.
+Let -1 be translated to --.
+Let 42 be translated to Stack value (by default pulled from the ROM):.
+
+.rom en_US
+Remember that 42 will always be 556.
+Remember that 42 will always be 1.
+
+.code init
+push 474c
+
+.render main
+call header
+call buttons
+
+.render buttons
+cont button
+text 78t
+hear click add
+econ
+cont button
+text -10709t
+hear click sub
+econ
+
+.render header
+cont
+show 5322t
+text 728t
+elem br
+cont b
+text 474c
+econ
+elem br
+text 474t
+cont h3
+text 0s
+econ
+econ
+
+.code add
+push 10451c
+madd
+rend
+
+.code sub
+push 10451c
+swap
+msub
+rend

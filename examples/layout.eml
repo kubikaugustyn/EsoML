@@ -1,0 +1,37 @@
+.strings en_US
+Let 1 be translated to EsoML layout example.
+Let 2 be translated to <h2>This is manually injected raw HTML</h1>.
+Let 3 be translated to First item.
+Let 4 be translated to Second item.
+Let 5 be translated to Math output: .
+
+.rom en_US
+Remember that 1 will always be 3.
+Remember that 2 will always be 7.
+
+.code init
+push 78c            ^ The init code is ran at the beginning before anything else
+push 90c            Pushes a value to the stack. See `valueStack` in the console to see the stack.
+
+madd                Adds the top 2 numbers on the stack together (we'll render them later)
+
+.render main
+cont h1             Creates a container (div by default)
+text 78t            Adds text to the content (equivalent to innerText)
+econ                Closes the container
+
+show 90t            Adds raw HTML to the content (equivalent to innerHTML).
+
+cont ul             Nesting of elements is possible...
+cont li
+text 102t
+econ
+cont li
+text 114t
+econ
+econ
+
+cont
+text 126t
+text 0s             <x>s means the item #-x at the stack (e.g. 1s is the second item from the end on the stack)
+econ

@@ -1,0 +1,112 @@
+.unsafe_mode ihatemyselfcuzirequireanargumentineverysection
+
+.strings en_US
+Let 1 be translated to The truth machine in EsoML.
+Let 2 be translated to Enter either 0 to print 0 once or 1 to print 1 indefinitely (2 is for unknown input): .
+Let 3 be translated to Output: .
+Let 4 be translated to Input: .
+Let 5 be translated to 0.
+Let 6 be translated to 1.
+Let 7 be translated to .
+
+.rom en_US
+Remember that 1 will always be 0.
+Remember that 2 will always be 1.
+Remember that 3 will always be 2.
+
+.code init
+push 150t    Load ''
+push 102c    Load 2
+
+.render main
+call truthMachine
+
+.render truthMachine
+cont h1
+text 78t
+econ
+cont span
+text 90t
+
+cont input
+hear input parseInput
+econ
+
+econ
+cont
+text 114t
+text 0s
+econ
+cont
+text 102t
+call tick
+econ
+
+.render tick
+copy            Here starts the IF stack[0] == 0
+push 78c
+comp
+ifis
+call setStrZero
+endi
+
+copy            Here starts the IF stack[0] == 1
+push 90c
+comp
+ifis
+call addStrOne
+rend
+endi
+
+text 1s
+
+.render setStrZero
+push 126t
+swap 2 0
+pops
+.render addStrOne
+swap 0 1
+push 138t
+madd
+swap 0 1
+
+.code parseInput
+push 150t    Load ""
+swap 2 0        Set it to the output text on the stack
+pops            Remove the old output text from the stack
+
+read            Check whether "0" was the input
+push 126t
+comp
+copy
+
+read            Check whether "1" was the input
+push 138t
+comp
+copy
+
+swap 0 2        Check whether the input was neither "1" or "0"
+madd
+push 90c
+msub
+
+ifis            If <unknown> was the input
+push 102c       Load 2
+swap 3 0        Set it to the state on the stack
+pops            Remove the old state from the stack
+endi
+
+ifis            If "1" was the input
+push 90c        Load 1
+swap 2 0        Set it to the state on the stack
+pops            Remove the old state from the stack
+endi
+
+ifis            If "0" was the input
+push 78c        Load 0
+swap 1 0        Set it to the state on the stack
+pops            Remove the old state from the stack
+endi
+
+rend            Update/rerender
+
