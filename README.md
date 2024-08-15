@@ -83,6 +83,13 @@ handle events and `.code main` is used to initialize the stack, for example, whe
 used as a component that can simply be reused and that will be able to output elements (thus it can use
 the `text`, `cont` and other render-only instructions.)
 
+**There are two special sections with special purposes:**
+
+```eml
+.code init          Runs once before the first render. Use it for example to initialize the stack.
+.render main        Runs once by default, however it is recommended to use the `rend` instruction to re-render.
+```
+
 **Example:**
 
 ```eml
@@ -252,7 +259,7 @@ def convertIDToKey(id_str: str, line: int) -> int:
         raise NotImplementedError("Huh? Math is failing?")
 ```
 
-To describe the algorithm, we'll use simpler notation:
+To describe the algorithm, we can use simpler notation:
 
 ```
 ID = parseInt(ID_STR, base=8)

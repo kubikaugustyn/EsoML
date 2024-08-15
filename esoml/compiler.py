@@ -59,6 +59,17 @@ class EsoMLCompiledFile:
         # beautify = lambda code: code # Uncomment to temporarily disable the beautifier
         return beautify(lib.replace(r"// EsoML COMPILED CODE", code))
 
+    def __repr__(self) -> str:
+        codeSections = {}
+        for name, _ in self.codeSections.items():
+            if self.codeSectionsRenderable[name]:
+                codeSections[name] = "(render only)"
+            else:
+                codeSections[name] = "(code only)"
+
+        return (f"EsoMLCompiledFile(unsafeMode={self.unsafeMode}, strings={self.strings}, "
+                f"rom={self.rom}, codeSections={codeSections})")
+
 
 class EsoMLCompiler:
     def compile(self, ast: AST, options: EsoMLOptions) -> EsoMLCompiledFile:
@@ -66,7 +77,7 @@ class EsoMLCompiler:
         unsafeMode: bool = options.getCompilerOptions().unsafeMode
         file: EsoMLCompiledFile = EsoMLCompiledFile(unsafeMode)
         print("Compiling with these compiler options:", repr(options.getCompilerOptions()))
-        print(f"Compiling with the locale set to {locale} with unsafe mode set to {unsafeMode}")
+        # print(f"Compiling with the locale set to {locale} with unsafe mode set to {unsafeMode}")
 
         self.compileConstants(ast, locale, NodeType.SECTION_STRINGS, SectionStringsNode,
                               StringEntryNode, file.strings, "strings")
