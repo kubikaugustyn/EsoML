@@ -204,7 +204,7 @@ The `msub` instruction is used to subtract two numbers from each other. The proc
 
 ### Maths - MUL - `mmul`
 
-The `mdiv` instruction is used to multiply two numbers. The process/calculation is the following:
+The `mmul` instruction is used to multiply two numbers. The process/calculation is the following:
 
 - Pop A from the top of the stack
 - Pop B from the top of the stack

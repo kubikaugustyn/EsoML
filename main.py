@@ -7,9 +7,10 @@ from kutil.protocol.HTTP import HTTPRequest, HTTPResponse, HTTPHeaders
 
 from esoml.compile import compileEsoML, EsoMLOptions
 
-# EML_PATH: Final[str] = "main.eml"
+print("main.py:10: You can hardcode the source EsoML file's path here! Default is 'main.eml'")
+EML_PATH: Final[str] = "main.eml"
 # EML_PATH: Final[str] = "examples/truth_machine.eml"
-EML_PATH: Final[str] = "examples/counter.eml"
+# EML_PATH: Final[str] = "examples/counter.eml"
 # EML_PATH: Final[str] = "examples/layout.eml"
 
 lastEMLContents: str | None = None
